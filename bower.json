@@ -1,0 +1,12 @@
+{
+  "name": "delegator",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "app/vendor"
+  ],
+  "dependencies": {
+    "jquery": "~2.0.3",
+    "bootstrap": "~3.0.3"
+  }
+}
