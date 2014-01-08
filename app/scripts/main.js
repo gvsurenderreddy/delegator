@@ -32,5 +32,6 @@ setActionBadge();
 chrome.browserAction.onClicked.addListener(function() {
   localStorage['enabled'] = !delegator.options.enabled;
   delegator.options.initialize();
+  delegator.proxy.initialize();
   setActionBadge();
 });
