@@ -18,7 +18,8 @@
       localStorage[input.id] = $input.val();
     });
 
-    initializeProxy();
+    // update proxy configuration
+    delegator.proxy.initialize();
 
     var alert = $('#saved-alert');
 
