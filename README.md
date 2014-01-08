@@ -11,7 +11,3 @@ Chrome extensions which routes certain sites over a proxy (just like ProxMate, P
 - Tick `Developer mode`
 - Select `Load unpacked extension...`
 - Set your proxy in the options
-
-# Supported sites
-
-- YouTube

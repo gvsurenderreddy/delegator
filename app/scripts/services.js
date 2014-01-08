@@ -7,5 +7,11 @@ delegator.services = [
       'host === "www.youtube.com"',
       '(/^.+\.googlevideo\.com$/).test(host)'
     ]
+  },
+  {
+    name: 'Grooveshark',
+    conditions: [
+      'host === "grooveshark.com"'
+    ]
   }
 ];

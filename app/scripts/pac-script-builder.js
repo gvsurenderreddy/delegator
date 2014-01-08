@@ -2,8 +2,10 @@
 
 delegator.builder = {
   generatePacScript: function() {
-    var server = localStorage['server'];
-    var port = localStorage['port'];
+    delegator.options.initialize();
+
+    var server = delegator.options.server;
+    var port = delegator.options.port;
 
     var proxy = 'DIRECT';
 
@@ -11,19 +13,23 @@ delegator.builder = {
       proxy = 'PROXY ' + server + ':' + port;
     }
 
-    var pacScript = 
+    if (!delegator.options.enabled) {
+      proxy = 'DIRECT';
+    }
+
+    var pacScript =
       'function FindProxyForURL(url, host) {\n';
 
     for (var i = 0; i < delegator.services.length; i++) {
       var service = delegator.services[i];
 
-      pacScript += 
+      pacScript +=
         '  if (' + service.conditions.join(' || ') + ') {\n' +
         '    return "' + proxy + '";\n' +
         '  }\n\n';
     }
 
-    pacScript += 
+    pacScript +=
       '  return "DIRECT";\n' +
       '}';
 
