@@ -8,8 +8,10 @@
 <body>
 
   <nav class="navbar navbar-default" role="navigation">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">Delegator</a>
+    <div class="container">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">Delegator</a>
+      </div>
     </div>
   </nav>
 
@@ -21,19 +23,23 @@
     <form id="options" role="form">
        <div class="checkbox">
         <label>
-          <input type="checkbox" ng-model="proxy.enabled"> Enabled
+          <input type="checkbox" ng-model="enabled"> Enabled
         </label>
       </div>
-      <div class="form-group">
-        <label for="server">Server</label>
-        <input type="text" id="server" class="form-control" ng-model="proxy.server">
-      </div>
-      <div class="form-group">
-        <label for="port">Port</label>
-        <input type="text" id="port" class="form-control" ng-model="proxy.port">
-      </div>
-      <button type="submit" class="btn btn-default" ng-click="save()">Save</button>
     </form>
+
+    <form class="form-inline" role="form" ng-repeat="proxy in proxies">
+      <div class="form-group">
+        <label class="sr-only">Server</label>
+        <input type="type" class="form-control" placeholder="Server" ng-model="proxy.server">
+      </div>
+      <div class="form-group">
+        <label class="sr-only">Port</label>
+        <input type="type" class="form-control" placeholder="Port" ng-model="proxy.port">
+      </div>
+    </form>
+
+    <button type="submit" class="btn btn-default" ng-click="save(proxies)">Save</button>
 
     <hr>
 

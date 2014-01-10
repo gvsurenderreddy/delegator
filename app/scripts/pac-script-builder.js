@@ -2,10 +2,11 @@
 
 delegator.builder = {
   generatePacScript: function() {
-    delegator.options.initialize();
+    delegator.settings.load();
 
-    var server = delegator.options.server;
-    var port = delegator.options.port;
+    var proxies = delegator.settings.proxies;
+    var server = proxies[0].server;
+    var port = proxies[0].port;
 
     var proxy = 'DIRECT';
 
@@ -13,7 +14,7 @@ delegator.builder = {
       proxy = 'PROXY ' + server + ':' + port;
     }
 
-    if (!delegator.options.enabled) {
+    if (!delegator.settings.enabled) {
       proxy = 'DIRECT';
     }
 

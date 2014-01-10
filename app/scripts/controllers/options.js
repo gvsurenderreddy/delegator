@@ -4,28 +4,43 @@ var app = angular.module('delegator',[]);
 
 app.controller('OptionsCtrl', ['$scope', '$timeout', function($scope, $timeout) {
 
-    $scope.proxy = {
-      enabled: delegator.options.enabled,
-      server: delegator.options.server,
-      port: delegator.options.port
+  $scope.enabled = delegator.settings.enabled;
+
+  $scope.proxies = delegator.settings.proxies;
+
+  $scope.services = delegator.services;
+
+  $scope.save = function(proxies) {
+    $scope.saved = true;
+
+    // Hide notification after 2 seconds.
+    $timeout(function() {
+      $scope.saved = false;
+    }, 2000);
+
+
+    var obj = {
+      proxies: []
     };
 
-    $scope.services = delegator.services;
+    for(var i = 0; i < proxies.length; i++) {
 
-    $scope.save = function() {
-      $scope.saved = true;
+      var proxy = proxies[i];
 
-      // Hide notification after 2 seconds.
-      $timeout(function() {
-        $scope.saved = false;
-      }, 2000);
+      if (typeof proxy.server === 'undefined' || typeof proxy.port === 'undefined') {
+        continue;
+      }
 
-      // Stores new settings in local storage.
-      localStorage['enabled'] = $scope.proxy.enabled;
-      localStorage['server'] = $scope.proxy.server;
-      localStorage['port'] = $scope.proxy.port;
+      obj.proxies.push({
+        server: proxy.server,
+        port: proxy.port
+      });
+    }
 
-      // Reinitialize proxy configuration.
-      delegator.proxy.initialize();
-    };
+    localStorage['enabled'] = $scope.enabled;
+    delegator.settings.save(obj);
+
+    // Reinitialize proxy configuration.
+    delegator.proxy.initialize();
+  };
 }]);
